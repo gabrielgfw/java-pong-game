@@ -36,6 +36,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         }
 
         Graphics g = layer.getGraphics();
+
         // Resets player render, avoiding render overflow;
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
@@ -43,14 +44,35 @@ public class Game extends Canvas implements Runnable, KeyListener {
         player.render(g);
 
         g = bs.getDrawGraphics();
+
+        // Sets a default background layer, so we can render objects over it.
         g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
 
+        // Makes everything above visible inside game's window.
         bs.show();
     }
 
     @Override
     public void run() {
         while(true) {
+
+            // # Game Loop (while):
+            // Turns the game inside a loop.
+            // By using threads, we are able to make the game to flow seamless.
+
+            // # Thread:
+            // Turns possible to do more than one thing at time.
+
+            // # Tick:
+            // Takes the game's logic and apply in every loop's section.
+
+            // # Render:
+            // Responsible for all graphics components in the game.
+
+            // # IMPORTANT:
+            // Always tick before render,
+            // so we can apply logical changes before it can be seemed.
+
             tick();
             render();
             try {
@@ -70,7 +92,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
 
         // # IMPORTANT:
-        // Treats the event when certain key is preseed.
+        // Treats the event when certain key is pressed.
         // Keep in mind that this doesn't prevent key released events.
         // So if there's not a keyReleased event tied with keyPressed events,
         // you going to have an endless render towards the direction once pressed.
@@ -93,6 +115,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     public static void main(String[] args) {
         Game game = new Game();
+
+        // # JFrame:
+        // Responsible for creating the game's window;
+        // We need to setup some configurations (below) to prevent undesirables behavior.
 
         JFrame frame = new JFrame("Pong Game");
         frame.setResizable(false);
