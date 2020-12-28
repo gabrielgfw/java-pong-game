@@ -14,12 +14,19 @@ public class Enemy {
     public Enemy(int x, int y) {
         this.x = x;
         this.y = y;
-        this.width = 40;
-        this.height = 10;
+        this.width = 30;
+        this.height = 5;
     }
 
     public void tick() {
+        // # Enemy's IA:
+        x += (Game.ball.x - x - 20) * 0.0958;
 
+        if(x + width > Game.WIDTH) {
+            x = Game.WIDTH - width;
+        } else if(x < 0) {
+            x = 0;
+        }
     }
 
     public void render(Graphics g) {

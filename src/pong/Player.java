@@ -11,8 +11,8 @@ public class Player {
     public Player (int x, int y) {
         this.x = x;
         this.y = y;
-        this.width = 40;
-        this.height = 10;
+        this.width = 30;
+        this.height = 5;
     }
 
     public void tick() {
