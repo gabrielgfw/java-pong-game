@@ -17,16 +17,20 @@ public class Game extends Canvas implements Runnable, KeyListener {
     public BufferedImage layer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     public Player player;
     public Enemy enemy;
+    public Ball ball;
 
     public Game() {
         this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
         this.addKeyListener(this);
         player = new Player(100, HEIGHT-10);
         enemy = new Enemy(100, 0);
+        ball = new Ball(100, HEIGHT/2 - 1);
     }
 
     public void tick() {
         player.tick();
+        enemy.tick();
+        ball.tick();
     }
 
     public void render() {
@@ -43,7 +47,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
+        // Players Render
         player.render(g);
+        enemy.render(g);
+        ball.render(g);
 
         g = bs.getDrawGraphics();
 
